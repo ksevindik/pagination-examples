@@ -9,6 +9,7 @@ import java.math.BigDecimal
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import kotlin.random.Random
+import kotlin.random.nextLong
 
 @Component
 class DataInitializer(
@@ -34,7 +35,7 @@ class DataInitializer(
             val orders = (1..98).map { index ->
                 Order().apply {
                     status = statuses[index % statuses.size]
-                    createdAt = Instant.now().minus((98 - index).toLong(), ChronoUnit.HOURS)
+                    createdAt = Instant.ofEpochSecond(Random.nextLong(LongRange(1,10_000)))
                     
                     // Add 1-4 random items to each order
                     val itemCount = Random.nextInt(1, 5)
